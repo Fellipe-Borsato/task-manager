@@ -1,9 +1,21 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { OverviewPage } from "./components/organisms/overviewPage";
+import ReactDOM from "react-dom/client";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Layout } from "./Layout";
+import { OverviewPage } from "./components/OverviewPage/organisms/overviewPage";
+import "./index.css";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <OverviewPage />,
+      },
+    ],
+  },
+]);
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <OverviewPage />
-  </StrictMode>,
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <RouterProvider router={router} />,
 );
